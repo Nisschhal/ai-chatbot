@@ -33,6 +33,8 @@ export async function POST(req: Request) {
     }
     const body = (await req.json()) as ChatRequestBody
 
+    console.log("Body: ", { body })
+
     const { messages, newMessage, chatId } = body
 
     const convex = getConvexClient()

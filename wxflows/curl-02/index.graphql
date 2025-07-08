@@ -1,0 +1,60 @@
+type Appointment {
+  id: String!
+  customerName: String!
+  email: String!
+  phone: String!
+  status: String!
+  selectedDate: DateTime!
+  selectedTime: String!
+  message: String
+  isForSelf: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userId: String!
+  bookedById: String!
+  createdById: String!
+  serviceId: String!
+  resourceId: JSON
+  cancelledAt: JSON
+  service: Service!
+  user: User!
+}
+
+type Service {
+  id: String!
+  title: String!
+  description: String!
+  createdAt: DateTime!
+  status: String!
+  estimatedDuration: Int!
+  updatedAt: DateTime!
+  businessDetailId: String!
+}
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  phone: String
+  emailVerified: DateTime
+  password: String!
+  role: String!
+  isActive: Boolean!
+  image: JSON
+  lastActive: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AppointmentResponse {
+  data: [Appointment!]!
+  status: Int!
+  success: Boolean!
+  message: String!
+  errorDetail: JSON
+}
+
+type Query {
+  appointmentQuery(id: String): AppointmentResponse
+    @rest(endpoint: "https://appointege.vercel.app/api/appointment/")
+}

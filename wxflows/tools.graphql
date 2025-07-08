@@ -17,7 +17,7 @@
 #     )
 # }
 # [[ end of tool definition example ]]
-
+# schema.graphql
 extend type Query {
   wikipediaTool: TC_GraphQL
     @supplies(query: "tc_tools")
@@ -50,7 +50,7 @@ extend type Query {
         { name: "name", const: "curl_comments" }
         {
           name: "description"
-          const: "Retrieve comments from a dummy JSON API. Return a list of comment  with user information, including body, likes, postId, and user details (username)"
+          const: "Retrieve comments from a dummy JSON API. Return a list of comment with user information, including body, likes, postId, and user details (username)"
         }
         { name: "fields", const: "dummyCommentsQuery" }
       ]
@@ -63,14 +63,24 @@ extend type Query {
         { name: "name", const: "customer_data" }
         {
           name: "description"
-          const: "Retrieve customer information including their address and order history. Return customer detail like name, email, address, and past orders with shipping information. To search for customer with id: 1, use the curl followed by /1 i.e. https://api.example.com/customers/1"
+          const: "Retrieve customer information including their address and order history. Return customer detail like name, email, address, and past orders with shipping information."
         }
         { name: "fields", const: "customerQuery" }
       ]
     )
-}
-
-extend type Query {
+  appointment_data: TC_GraphQL
+    @supplies(query: "tc_tools")
+    @materializer(
+      query: "tc_graphql_tool"
+      arguments: [
+        { name: "name", const: "appointment_data" }
+        {
+          name: "description"
+          const: "Retrieve appointment information from the Appointege API. Returns appointment details including customer name, email, phone, status, selected date and time, message, and associated service and user information. Use the 'id' parameter to fetch a specific appointment, e.g., id: 'cmcodhmf20001mst06148m0cp'. If no id is provided, all appointments are returned."
+        }
+        { name: "fields", const: "appointmentQuery" }
+      ]
+    )
   youtube_transcript: TC_GraphQL
     @supplies(query: "tc_tools")
     @materializer(

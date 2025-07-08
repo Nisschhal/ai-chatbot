@@ -1,24 +1,27 @@
-type CommentsEntry {
-  body: String
-  id: Int
-  likes: Int
-  postId: Int
-  user: User
+# schema.graphql
+
+# Supporting types for curl_comments (from curl/index.graphql)
+type Comment {
+  id: Int!
+  body: String!
+  likes: Int!
+  postId: Int!
+  user: CommentUser!
 }
 
-type Root {
-  comments: [CommentsEntry]
-  limit: Int
-  skip: Int
-  total: Int
+type CommentUser {
+  id: Int!
+  fullName: String!
+  username: String!
 }
 
-type User {
-  fullName: String
-  id: Int
-  username: String
+type CommentsResponse {
+  comments: [Comment!]!
+  limit: Int!
+  skip: Int!
+  total: Int!
 }
 
 type Query {
-  dummyCommentsQuery: Root @rest(endpoint: "https://dummyjson.com/comments")
+  dummyCommentsQuery: Comment @rest(endpoint: "https://dummyjson.com/comments")
 }

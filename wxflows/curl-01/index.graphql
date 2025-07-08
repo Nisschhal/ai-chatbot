@@ -1,4 +1,4 @@
-type Address {
+type CustomerAddress {
   city: String
   countryRegion: String
   id: Int
@@ -16,8 +16,8 @@ type OrdersEntry {
   trackingId: String
 }
 
-type RootEntry {
-  address: Address
+type Customer {
+  address: CustomerAddress
   email: String
   id: Int
   name: String
@@ -25,6 +25,6 @@ type RootEntry {
 }
 
 type Query {
-  customerQuery: [RootEntry]
+  customerQuery: [Customer]
     @rest(endpoint: "https://introspection.apis.stepzen.com/customers")
 }
